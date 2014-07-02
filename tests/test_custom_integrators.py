@@ -303,7 +303,7 @@ integrator = integrators.VVVRIntegrator(timestep=timestep, temperature=temperatu
 integrator.setConstraintTolerance(tolerance)
 
 # Select platform manually.
-platform_name = 'CUDA'
+platform_name = 'CPU'
 platform = openmm.Platform.getPlatformByName(platform_name)
 options = {}
 if platform_name == 'CUDA':
