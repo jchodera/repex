@@ -1,6 +1,5 @@
 numpy
 nose
-pymbar
 mdtraj-dev
 openmm
 netcdf4
