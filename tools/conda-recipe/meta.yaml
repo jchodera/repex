@@ -1,0 +1,28 @@
+package:
+  name: repex
+  version: !!str dev
+
+
+requirements:
+  build:
+    - python
+    - cython
+    - numpy
+    - scipy
+    - setuptools
+    - mdtraj-dev
+    - openmm    
+    - netcdf4
+
+  run:
+    - python
+    - pandas
+    - scipy
+    - mdtraj-dev
+    - openmm    
+    - netcdf4
+
+about:
+  home: https://github.com/choderalab/repex
+  license: GNU Lesser General Public License v2 or later (LGPLv2+)
+
