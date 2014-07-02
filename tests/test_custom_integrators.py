@@ -275,9 +275,10 @@ niterations = 100 # number of production iterations
 #testsystem = testsystems.Diatom(constraint=True, use_central_potential=True)
 #testsystem = testsystems.ConstraintCoupledHarmonicOscillator()
 #testsystem = testsystems.LysozymeImplicit(flexibleConstraints=False, shake=True)
-testsystem = testsystems.HarmonicOscillator()
+#testsystem = testsystems.HarmonicOscillator()
 #testsystem = testsystems.HarmonicOscillatorArray(N=16)
 #testsystem = testsystems.WaterBox(constrain=True, flexible=False)
+testsystem = testsystems.LennardJonesFluid()
 
 # Retrieve system and positions.
 [system, positions] = [testsystem.system, testsystem.positions]
@@ -290,8 +291,8 @@ ndof = 3*system.getNumParticles() - system.getNumConstraints()
 #integrator = integrators.AndersenVelocityVerletIntegrator(temperature=temperature, timestep=timestep)
 #integrator = integrators.MetropolisMonteCarloIntegrator(timestep=timestep, temperature=temperature, sigma=0.01*units.angstroms)
 #integrator = integrators.HMCIntegrator(timestep=timestep, temperature=temperature)
-#integrator = integrators.VVVRIntegrator(timestep=timestep, temperature=temperature, collision_rate=collision_rate)
-integrator = integrators.GHMCIntegrator(timestep=timestep, temperature=temperature, collision_rate=collision_rate)
+integrator = integrators.VVVRIntegrator(timestep=timestep, temperature=temperature, collision_rate=collision_rate)
+#integrator = integrators.GHMCIntegrator(timestep=timestep, temperature=temperature, collision_rate=collision_rate)
 #integrator = integrators.VelocityVerletIntegrator(timestep)
 #integrator = openmm.VerletIntegrator(timestep)
 
@@ -302,12 +303,16 @@ integrator = integrators.GHMCIntegrator(timestep=timestep, temperature=temperatu
 integrator.setConstraintTolerance(tolerance)
 
 # Select platform manually.
-platform_name = 'Reference'
+platform_name = 'CUDA'
 platform = openmm.Platform.getPlatformByName(platform_name)
 options = {}
-#options = {"OpenCLPrecision": "double", "CudaPrecision": "double"}
-#options = {"OpenCLPrecision": "single", "CudaPrecision": "single"}
-#options = {"OpenCLPrecision": "mixed", "CudaPrecision": "mixed"}
+if platform_name == 'CUDA':
+   options = {"CudaPrecision": "double"}
+elif platform_name == 'OpenCL':
+   options = {"OpenCLPrecision": "double"}
+   #options = {"OpenCLPrecision": "single"}
+   #options = {"OpenCLPrecision": "mixed"}
+
 
 # Create Context and set positions and velocities.
 context = openmm.Context(system, integrator, platform, options)
