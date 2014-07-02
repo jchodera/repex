@@ -1,5 +1,4 @@
 numpy
-nose
 mdtraj-dev
 openmm
 netcdf4
