@@ -12,6 +12,3 @@ conda config --add channels http://conda.binstar.org/omnia
 conda config --add channels http://conda.binstar.org/choderalab
 conda create --yes -n ${python} python=${python} --file tools/ci/requirements-conda.txt
 source activate $python
-
-# Need to install nose-exclude
-pip install nose-exclude
