@@ -1,6 +1,5 @@
 numpy
 nose
-nose-exclude
 pymbar
 mdtraj-dev
 openmm
